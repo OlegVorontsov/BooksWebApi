@@ -46,7 +46,5 @@ namespace Books.API.Controllers
         {
             return Ok(_booksService.DeleteBook(id));
         }
-
-        //changes from front dev
     }
 }
