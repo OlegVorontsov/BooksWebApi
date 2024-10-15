@@ -21,6 +21,13 @@ namespace Books.API.Controllers
             var response = books.Select(b => new BooksResponse(b.Id, b.Title, b.Description, b.Price));
             return Ok(response);
         }
+        [HttpGet("{id:guid}")]
+        public async Task<ActionResult<Guid>> GetBookById(Guid id)
+        {
+            var book = await _booksService.GetBook(id);
+            var response = new BooksResponse(book.Item1.Id, book.Item1.Title, book.Item1.Description, book.Item1.Price);
+            return Ok(response);
+        }
         [HttpPost]
         public async Task<ActionResult<Guid>> CreateBook([FromBody] BooksRequest request)
         {

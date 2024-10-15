@@ -7,5 +7,6 @@ namespace Books.DataAccess.Repositories
         Task<Guid> DeleteAsync(Guid id);
         Task<List<Book>> GetAllAsync();
         Task<Guid> UpdateAsync(Guid id, string title, string description, decimal price);
+        Task<(Book, string)> GetByIdAsync(Guid id);
     }
 }

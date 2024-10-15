@@ -49,5 +49,11 @@ namespace Books.DataAccess.Repositories
                 .ExecuteDeleteAsync();
             return id;
         }
+        public async Task<(Book, string)> GetByIdAsync(Guid id)
+        {
+            var bookEntity = await _context.Books.FirstAsync(b => b.Id == id);
+            var book = Book.Create(bookEntity.Id, bookEntity.Title, bookEntity.Description, bookEntity.Price);
+            return book;
+        }
     }
 }
