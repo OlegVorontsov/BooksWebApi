@@ -51,7 +51,12 @@ namespace Books.DataAccess.Repositories
         }
         public async Task<(Book, string)> GetByIdAsync(Guid id)
         {
-            var bookEntity = await _context.Books.FirstAsync(b => b.Id == id);
+            var bookEntity = await _context.Books.FirstOrDefaultAsync(b => b.Id == id);
+            if (bookEntity == null)
+            {
+                var bookNull = Book.Create(Guid.Empty, "title", "description", 1);
+                return bookNull;
+            }
             var book = Book.Create(bookEntity.Id, bookEntity.Title, bookEntity.Description, bookEntity.Price);
             return book;
         }

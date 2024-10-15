@@ -25,6 +25,7 @@ namespace Books.API.Controllers
         public async Task<ActionResult<Guid>> GetBookById(Guid id)
         {
             var book = await _booksService.GetBook(id);
+            if (!string.IsNullOrEmpty(book.Item2)) return NotFound(book.Item2);
             var response = new BooksResponse(book.Item1.Id, book.Item1.Title, book.Item1.Description, book.Item1.Price);
             return Ok(response);
         }

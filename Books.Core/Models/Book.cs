@@ -19,6 +19,10 @@ public class Book
     {
       error = "Title can't be empty or longer than 250 symbols";
     }
+    if (id.Equals(Guid.Empty))
+    {
+      error = "Id is invalid";
+    }
 
     var book = new Book(id, title, description, price);
 
